@@ -1,4 +1,2 @@
 output/
-modules/
-*.txt
-*.py
+modules/__pycache__/
