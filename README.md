@@ -102,9 +102,8 @@ Output
 
 ```
 
-```
-
 **Example 3: Optimize the GEMM NCubed application from Machsuite using CollectiveHLS, ensuring that the re-propose directives feature is enabled**
+
 
 ```bash
 python3 CollectiveHLS.py --APPLICATION_TO_BE_OPTIMIZED Machsuite-GEMM-NCubed --REPROPOSE_DIRECTIVES True
