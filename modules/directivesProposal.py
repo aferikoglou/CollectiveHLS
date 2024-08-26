@@ -1,5 +1,4 @@
 import os
-
 import pandas as pd
 
 class DirectivesProposal:
@@ -7,16 +6,9 @@ class DirectivesProposal:
     The `DirectivesProposal` class generates HLS directives for array and loop action points based on 
     the distribution of Pareto optimal solutions. It also handles the mapping of predicted directives 
     to application-specific directives.
-
-    Attributes:
-        OUTPUT_DIR (str): Directory where output files are saved.
-        PROBABILITY_THRESHOLD (float): Threshold probability for selecting a directive.
-        ARRAY_ACTION_POINTS_ORDERED (list): List of array action points in the order they appear.
-        LOOP_ACTION_POINTS_ORDERED (list): List of loop action points in the order they appear.
-        ACTION_POINTS_ORDERED (list): Combined list of array and loop action points.
     """
 
-    def __init__(self, OUTPUT_DIR: str, PROBABILITY_THRESHOLD: float):
+    def __init__(self, OUTPUT_DIR, PROBABILITY_THRESHOLD):
         """
         Initializes the `DirectivesProposal` class.
 
@@ -50,7 +42,7 @@ class DirectivesProposal:
         self.PROBABILITY_THRESHOLD = PROBABILITY_THRESHOLD
         self.OUTPUT_DIR = OUTPUT_DIR
 
-    def _get_array_AP_directive(self, array_directives: list) -> str:
+    def _get_array_AP_directive(self, array_directives):
         """
         Determines the most likely directive for an array action point based on occurrence frequency.
 
@@ -84,7 +76,7 @@ class DirectivesProposal:
 
         return proposed_directive
 
-    def _get_loop_AP_directive(self, loop_directives: list) -> str:
+    def _get_loop_AP_directive(self, loop_directives):
         """
         Determines the most likely directive for a loop action point based on occurrence frequency.
 
@@ -115,7 +107,7 @@ class DirectivesProposal:
 
         return proposed_directive
 
-    def propose_directives_uncond(self, df_PO_distribution: pd.DataFrame) -> dict:
+    def propose_directives_uncond(self, df_PO_distribution):
         """
         Proposes directives for all action points based on the distribution of Pareto optimal solutions.
 
@@ -142,7 +134,7 @@ class DirectivesProposal:
 
         return AP_directive_map
     
-    def get_actual_proposed_directives(self, predicted_cluster_proposed_directives: dict, app_name: str) -> dict:
+    def get_actual_proposed_directives(self, predicted_cluster_proposed_directives, app_name):
         """
         Maps predicted directives from a cluster to actual application-specific directives.
 
@@ -186,7 +178,9 @@ class DirectivesProposal:
                         if not directive:
                             print("Modified directive proposal due to dimension size.")
             else:
-                action_point, label = parts[0], parts[1]
+                action_point, label = parts[
+
+0], parts[1]
                 proposed_directive = predicted_cluster_proposed_directives[action_point]
                 if proposed_directive != "NDIR":
                     directive_parts = proposed_directive.split('_')
@@ -202,7 +196,7 @@ class DirectivesProposal:
 
         return label_directive_map
 
-    def get_application_action_point_label_map(self, app_name: str) -> dict:
+    def get_application_action_point_label_map(self, app_name):
         """
         Retrieves the mapping between action points and labels for a given application.
 
@@ -220,7 +214,7 @@ class DirectivesProposal:
 
         for line in lines:
             parts = line.strip().split(',')
-            action_point = int(parts[0])
+            action_point = parts[0]
             label = parts[2] if len(parts) > 3 else parts[1]
             application_action_point_label_map[action_point] = label
 

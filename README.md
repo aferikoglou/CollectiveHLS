@@ -67,12 +67,13 @@ Output
 * Synthesis Time = 691.6875653266907 sec
 *******************************************************
 
+
 ```
 
-**Example 2: Optimize the GEMM NCubed from Machsuite using CollectiveHLS**
+**Example 2: Optimize the GEMM NCubed application from Machsuite using CollectiveHLS, ensuring that the re-propose directives feature is disabled**
 
 ```bash
-python3 CollectiveHLS.py --APPLICATION_TO_BE_OPTIMIZED Machsuite-GEMM-NCubed
+python3 CollectiveHLS.py --APPLICATION_TO_BE_OPTIMIZED Machsuite-GEMM-NCubed --REPROPOSE_DIRECTIVES False
 
 Output
 
@@ -94,9 +95,90 @@ Output
 * DSP %          = 22 %
 * FF %           = 354 %
 * LUT %          = 262 %
-* Synthesis Time = 1026.5358951091766 sec
+* Synthesis Time = 1081.106892824173 sec
+* The design proposed by CollectiveHLS was synthesizable but not feasible.
 *******************************************************
 
+
+```
+
+```
+
+**Example 3: Optimize the GEMM NCubed application from Machsuite using CollectiveHLS, ensuring that the re-propose directives feature is enabled**
+
+```bash
+python3 CollectiveHLS.py --APPLICATION_TO_BE_OPTIMIZED Machsuite-GEMM-NCubed --REPROPOSE_DIRECTIVES True
+
+Output
+
+*******************************************************
+*                   CollectiveHLS                     *
+*******************************************************
+* Number of PCs         = 3
+* Number of Clusters    = 5
+* Probability Threshold = 0.1
+* VitisHLS Opt.         = False
+* Re-propose Directives = True
+* FPGA Id               = xczu7ev-ffvc1156-2-e
+* Target Clock Period   = 3.33
+*******************************************************
+* Optimized App. = Machsuite-GEMM-NCubed
+*******************************************************
+* Design Latency = 0.01646019 msec
+* BRAM %         = 0 %
+* DSP %          = 22 %
+* FF %           = 354 %
+* LUT %          = 262 %
+* Synthesis Time = 1080.2370615005493 sec
+* The design proposed by CollectiveHLS was synthesizable but not feasible.
+*******************************************************
+
+# Re-propose Directives Iteration 1
+
+*******************************************************
+*                   CollectiveHLS                     *
+*******************************************************
+* Number of PCs         = 3
+* Number of Clusters    = 5
+* Probability Threshold = 0.1
+* VitisHLS Opt.         = False
+* Re-propose Directives = True
+* FPGA Id               = xczu7ev-ffvc1156-2-e
+* Target Clock Period   = 3.33
+*******************************************************
+* Optimized App. = Machsuite-GEMM-NCubed
+*******************************************************
+* Design Latency = 0.01646019 msec
+* BRAM %         = 0 %
+* DSP %          = 22 %
+* FF %           = 354 %
+* LUT %          = 262 %
+* Synthesis Time = 1107.0174641609192 sec
+* The design proposed by CollectiveHLS was synthesizable but not feasible.
+*******************************************************
+
+# Re-propose Directives Iteration 2
+
+*******************************************************
+*                   CollectiveHLS                     *
+*******************************************************
+* Number of PCs         = 3
+* Number of Clusters    = 5
+* Probability Threshold = 0.1
+* VitisHLS Opt.         = False
+* Re-propose Directives = True
+* FPGA Id               = xczu7ev-ffvc1156-2-e
+* Target Clock Period   = 3.33
+*******************************************************
+* Optimized App. = Machsuite-GEMM-NCubed
+*******************************************************
+* Design Latency = 0.61709229 msec
+* BRAM %         = 0 %
+* DSP %          = 0 %
+* FF %           = 15 %
+* LUT %          = 12 %
+* Synthesis Time = 83.9670057296753 sec
+*******************************************************
 
 ```
 

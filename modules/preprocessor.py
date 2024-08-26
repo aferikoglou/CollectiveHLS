@@ -7,49 +7,27 @@ class Preprocessor:
     """
     Handles the standardization and PCA of source code feature vectors
     in the application dataset.
-
-    Attributes:
-    ----------
-    pc_num : int
-        Number of principal components to retain during PCA.
-    APP_SOURCE_CODE_CHARACTERISTICS_DATASET : str
-        Path to the CSV dataset containing the source code feature vectors.
-
-    Methods:
-    -------
-    _standardize_data(X):
-        Standardizes the input data to have zero mean and unit variance.
-    _pca(X):
-        Reduces the dimensionality of the input data using Principal Component Analysis (PCA).
-    preprocess():
-        Reads the dataset, standardizes it, applies PCA, and returns a DataFrame with the principal components.
     """
 
     def __init__(self, pc_num):
         """
         Initializes the Preprocessor with the specified number of principal components.
 
-        Parameters:
-        ----------
-        pc_num : int
-            Number of principal components to retain during PCA.
+        Args:
+            pc_num (int): Number of principal components to retain during PCA.
         """
-        self.APP_SOURCE_CODE_CHARACTERISTICS_DATASET = "./Knowledge_Base/Source_Code_Feature_Vectors.csv"
+        self.APP_SOURCE_CODE_CHARACTERISTICS_DATASET = "./KnowledgeBase/Source-Code-Feature-Vectors.csv"
         self.pc_num = pc_num
 
     def _standardize_data(self, X):
         """
         Standardizes the input data to have zero mean and unit variance.
 
-        Parameters:
-        ----------
-        X : numpy.ndarray
-            The input data to be standardized.
+        Args:
+            X (numpy.ndarray): The input data to be standardized.
 
         Returns:
-        -------
-        numpy.ndarray
-            The standardized data.
+            numpy.ndarray: The standardized data.
         """
         standard_scaler = StandardScaler()
         return standard_scaler.fit_transform(X)
@@ -58,15 +36,11 @@ class Preprocessor:
         """
         Applies Principal Component Analysis (PCA) to reduce the dimensionality of the input data.
 
-        Parameters:
-        ----------
-        X : numpy.ndarray
-            The standardized input data.
+        Args:
+            X (numpy.ndarray): The standardized input data.
 
         Returns:
-        -------
-        numpy.ndarray
-            The data transformed by PCA.
+            numpy.ndarray: The data transformed by PCA.
         """
         pca = PCA(n_components=self.pc_num)
         return pca.fit_transform(X)
@@ -76,9 +50,7 @@ class Preprocessor:
         Reads the dataset, standardizes the data, applies PCA, and returns the results as a DataFrame.
 
         Returns:
-        -------
-        pandas.DataFrame
-            A DataFrame containing the principal components and application names.
+            pandas.DataFrame: A DataFrame containing the principal components and application names.
         """
         # Read the dataset containing application names and feature vectors
         df = pd.read_csv(self.APP_SOURCE_CODE_CHARACTERISTICS_DATASET)

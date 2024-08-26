@@ -9,20 +9,6 @@ class HLSRunner:
     """
     Manages the High-Level Synthesis (HLS) process, including code preparation, TCL script generation,
     synthesis execution, and results collection. Supports synchronized multi-threaded execution.
-
-    Attributes:
-        DIRECTORY_PATH (str): Directory path where source files are located.
-        SRC_FILE_NAME (str): Name of the source code file.
-        TOP_LEVEL_FUNC_NAME (str): The top-level function to be synthesized.
-        TARGET_DEVICE (str): Target FPGA device for synthesis.
-        CLOCK_PERIOD_NS (str): Clock period for synthesis in nanoseconds.
-        SYNTHESIS_TIMEOUT_SEC (int): Maximum time to wait for synthesis completion, in seconds.
-        VITIS_OPTIMIZATIONS_ENABLED (bool): Flag to enable/disable Vitis HLS options.
-        SOURCE_CODE_LINES (list): List of lines read from the source code file.
-        SYNTHESIS_RESULTS (dict): Dictionary storing the results of the synthesis experiments.
-        CHECK_INTERVAL_SEC (int): Time interval (in seconds) to check synthesis status.
-        OUTPUT_DIR_NAME (str): Directory for storing synthesis outputs and logs.
-        LOCK (Lock): Lock object to synchronize access to shared resources in a multi-threaded environment.
     """
 
     def __init__(self, DIRECTORY_PATH, SRC_FILE_NAME, TOP_LEVEL_FUNC_NAME, TARGET_DEVICE, CLOCK_PERIOD_NS, SYNTHESIS_TIMEOUT_SEC, VITIS_OPTIMIZATIONS_ENABLED):
@@ -206,9 +192,47 @@ class HLSRunner:
 
     def get_synthesis_results(self):
         """
-        Returns the results of the synthesis experiments.
+        Retrieve the synthesis results for the original code variant based on whether Vitis optimizations
+        are enabled or not. The method returns the design's latency, resource utilization metrics,
+        and synthesis time.
 
         Returns:
-            dict: A dictionary containing results for all synthesis experiments.
+            tuple: A tuple containing the following:
+                - design_latency_msec (float): The design latency in milliseconds.
+                - bram_utilization (int): The utilization of BRAM resources as a percentage.
+                - dsp_utilization (int): The utilization of DSP resources as a percentage.
+                - ff_utilization (int): The utilization of flip-flop resources as a percentage.
+                - lut_utilization (int): The utilization of LUT resources as a percentage.
+                - synthesis_time_sec (float): The total synthesis time in seconds.
         """
-        return self.SYNTHESIS_RESULTS
+        
+        # Determine the key for accessing the synthesis results dictionary based on Vitis optimizations.
+        qor_map_key = "original_wVO" if self.VITIS_OPTIMIZATIONS_ENABLED else "original_woVO"
+        
+        # Initialize default values for synthesis metrics.
+        synthesis_time_sec = self.SYNTHESIS_RESULTS[qor_map_key]["synthesis_time_sec"]
+        design_latency_msec = -1
+        bram_utilization    = -1
+        dsp_utilization     = -1
+        ff_utilization      = -1
+        lut_utilization     = -1
+        
+        # Attempt to retrieve the synthesis metrics from the results dictionary.
+        try:
+            design_latency_msec = self.SYNTHESIS_RESULTS[qor_map_key]["design_latency_msec"]
+            bram_utilization = self.SYNTHESIS_RESULTS[qor_map_key]["bram_utilization"]
+            dsp_utilization = self.SYNTHESIS_RESULTS[qor_map_key]["dsp_utilization"]
+            ff_utilization = self.SYNTHESIS_RESULTS[qor_map_key]["ff_utilization"]
+            lut_utilization = self.SYNTHESIS_RESULTS[qor_map_key]["lut_utilization"]
+        except KeyError:
+            pass  # Ignore missing keys and keep default values.
+
+        # Return a tuple of synthesis metrics.
+        return (
+            design_latency_msec,
+            bram_utilization,
+            dsp_utilization,
+            ff_utilization,
+            lut_utilization,
+            synthesis_time_sec
+        )
