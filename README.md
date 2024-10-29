@@ -197,4 +197,12 @@ If you find our project useful, please consider citing our paper:
   keywords = {Source coding;Optimization;Knowledge based systems;Field programmable gate arrays;Measurement;Sociology;Pareto optimization;Collective;data-driven;design space exploration (DSE);field programmable gate array (FPGA);high-level synthesis (HLS)},
   doi      = {10.1109/LES.2023.3330610}
 }
+
+@article{ferikoglou2024collectivehls,
+  title={CollectiveHLS: A Collaborative Approach to High-Level Synthesis Design Optimization},
+  author={Ferikoglou, Aggelos and Kakolyris, Andreas and Masouros, Dimosthenis and Soudris, Dimitrios and Xydis, Sotirios},
+  journal={ACM Transactions on Reconfigurable Technology and Systems},
+  year={2024},
+  publisher={ACM New York, NY}
+}
 ```
