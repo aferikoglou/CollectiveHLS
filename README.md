@@ -198,6 +198,14 @@ If you find our project useful, please consider citing our paper:
   doi      = {10.1109/LES.2023.3330610}
 }
 
+@inproceedings{ferikoglou2024data,
+  title     = {Data-driven HLS optimization for reconfigurable accelerators},
+  author    = {Ferikoglou, Aggelos and Kakolyris, Andreas and Kypriotis, Vasilis and Masouros, Dimosthenis and Soudris, Dimitrios and Xydis, Sotirios},
+  booktitle = {Proceedings of the 61st ACM/IEEE Design Automation Conference},
+  pages     = {1--6},
+  year      = {2024}
+}
+
 @article{ferikoglou2024collectivehls,
   title     = {CollectiveHLS: A Collaborative Approach to High-Level Synthesis Design Optimization},
   author    = {Ferikoglou, Aggelos and Kakolyris, Andreas and Masouros, Dimosthenis and Soudris, Dimitrios and Xydis, Sotirios},
