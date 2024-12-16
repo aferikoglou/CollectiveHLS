@@ -181,9 +181,9 @@ Output
 
 ```
 
-## Publication
+## Publications
 
-If you find our project useful, please consider citing our paper:
+If you find our project useful, please consider citing our papers:
 
 ```
 @ARTICLE{10310220,
