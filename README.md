@@ -210,6 +210,9 @@ If you find our project useful, please consider citing our papers:
   title     = {CollectiveHLS: A Collaborative Approach to High-Level Synthesis Design Optimization},
   author    = {Ferikoglou, Aggelos and Kakolyris, Andreas and Masouros, Dimosthenis and Soudris, Dimitrios and Xydis, Sotirios},
   journal   = {ACM Transactions on Reconfigurable Technology and Systems},
+  volume    = {18},
+  number    = {1},
+  pages     = {1--32},
   year      = {2024},
   publisher = {ACM New York, NY}
 }
